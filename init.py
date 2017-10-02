@@ -3,7 +3,7 @@ import subprocess
 import ConfigParser
 
 config = ConfigParser.ConfigParser()
-config.read('autocreat_github.conf')
+config.read('autocreate_github.conf')
 
 dirp = os.path.join(config.get('init', 'local_init_repo'), config.get('init', 'init_repo_name'))
 init_repo_url = config.get('init', 'github_init_repo')

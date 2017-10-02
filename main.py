@@ -1,5 +1,5 @@
 import get_teams
-import creat_repos
+import create_repos
 import ConfigParser
 import argparse
 import sys
@@ -11,13 +11,13 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   config = ConfigParser.ConfigParser()
-  config.read('autocreat_github.conf')
+  config.read('autocreate_github.conf')
 
   if args.team:
     team = args.team.split()
     if len(team) > 3:
        print 'The team can have at most 3 members, but you have', len(team), 'members.'
-    creat_repos.creat_all(team, config.get('global', 'netrc_file'))
+    create_repos.create_all(team, config.get('global', 'netrc_file'))
     
   if args.team_file:
     teamf = args.team_file
@@ -26,4 +26,4 @@ if __name__ == "__main__":
     print '#teams: ', len(teams)
     #print teams
     for team in teams:
-      creat_repos.creat_all(team, config.get('global', 'netrc_file'))
+      create_repos.create_all(team, config.get('global', 'netrc_file'))

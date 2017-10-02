@@ -5,7 +5,7 @@ import time
 def check_status(ret, statuscode):
   return 'Status: ' + str(statuscode) in ret
 
-def creat_repo(repo_name, netrcf):
+def create_repo(repo_name, netrcf):
   """
   Create a repository on GitHub using the given name
   API ref.: https://developer.github.com/v3/repos/ 
@@ -16,9 +16,9 @@ def creat_repo(repo_name, netrcf):
       '"has_issues": true, '\
       '"has_wiki": true}\'' % repo_name
   #print param
-  #creat_cmd = 'curl -i -u ' + ':'.join(crd) +  ' https://api.github.com/orgs/ucsd-cse120-fa16/repos -d ' + param
-  creat_cmd = 'curl -i --netrc-file ' + netrcf +  ' https://api.github.com/orgs/ucsd-cse120-fa16/repos -d ' + param
-  proc = subprocess.Popen(creat_cmd, 
+  #create_cmd = 'curl -i -u ' + ':'.join(crd) +  ' https://api.github.com/orgs/ucsd-cse120-fa16/repos -d ' + param
+  create_cmd = 'curl -i --netrc-file ' + netrcf +  ' https://api.github.com/orgs/ucsd-cse120-fa16/repos -d ' + param
+  proc = subprocess.Popen(create_cmd, 
       shell = True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
   (out, err) = proc.communicate()
   ret = check_status(out, 201)
@@ -78,7 +78,7 @@ def __getcrd(netrcf):
      passw = l[l.rfind('password') + len('password'):].strip()
      return [uname, passw]
 
-def creat_all(team, netrcf, wait=1):
+def create_all(team, netrcf, wait=1):
   """
   Creat the repo, add the collaborators, and init the source code
   """
@@ -87,7 +87,7 @@ def creat_all(team, netrcf, wait=1):
   repo_name = __gen_repo_name(team)
   #print repo_name
   
-  if creat_repo(repo_name, netrcf) == False:
+  if create_repo(repo_name, netrcf) == False:
     print 'create repo [' + repo_name + '] failed!'
     return
   else:
